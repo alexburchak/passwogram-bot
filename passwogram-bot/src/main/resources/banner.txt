@@ -1,0 +1,19 @@
+ .S_sSSs     .S_SSSs      sSSs    sSSs   .S     S.     sSSs_sSSs      sSSSSs   .S_sSSs     .S_SSSs     .S_SsS_S.
+.SS~YS%%b   .SS~SSSSS    d%%SP   d%%SP  .SS     SS.   d%%SP~YS%%b    d%%%%SP  .SS~YS%%b   .SS~SSSSS   .SS~S*S~SS.
+S%S   `S%b  S%S   SSSS  d%S'    d%S'    S%S     S%S  d%S'     `S%b  d%S'      S%S   `S%b  S%S   SSSS  S%S `Y' S%S
+S%S    S%S  S%S    S%S  S%|     S%|     S%S     S%S  S%S       S%S  S%S       S%S    S%S  S%S    S%S  S%S     S%S
+S%S    d*S  S%S SSSS%S  S&S     S&S     S%S     S%S  S&S       S&S  S&S       S%S    d*S  S%S SSSS%S  S%S     S%S
+S&S   .S*S  S&S  SSS%S  Y&Ss    Y&Ss    S&S     S&S  S&S       S&S  S&S       S&S   .S*S  S&S  SSS%S  S&S     S&S
+S&S_sdSSS   S&S    S&S  `S&&S   `S&&S   S&S     S&S  S&S       S&S  S&S       S&S_sdSSS   S&S    S&S  S&S     S&S
+S&S~YSSY    S&S    S&S    `S*S    `S*S  S&S     S&S  S&S       S&S  S&S sSSs  S&S~YSY%b   S&S    S&S  S&S     S&S
+S*S         S*S    S&S     l*S     l*S  S*S     S*S  S*b       d*S  S*b `S%%  S*S   `S%b  S*S    S&S  S*S     S*S
+S*S         S*S    S*S    .S*P    .S*P  S*S  .  S*S  S*S.     .S*S  S*S   S%  S*S    S%S  S*S    S*S  S*S     S*S
+S*S         S*S    S*S  sSS*S   sSS*S   S*S_sSs_S*S   SSSbs_sdSSS    SS_sSSS  S*S    S&S  S*S    S*S  S*S     S*S
+S*S         SSS    S*S  YSS'    YSS'    SSS~SSS~S*S    YSSP~YSSY      Y~YSSY  S*S    SSS  SSS    S*S  SSS     S*S
+SP                 SP                                                         SP                 SP           SP
+Y                  Y                                                          Y                  Y            Y
+Version                         ${version}
+Built date                      ${builtDate}
+Built by                        ${builtBy}
+Built host                      ${builtHost}
+Built JDK                       ${builtJDK}

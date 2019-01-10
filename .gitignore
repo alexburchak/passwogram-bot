@@ -1,0 +1,12 @@
+.gitignore
+
+/.gradle/
+gradle.properties
+
+/.idea/
+*.iml
+
+/mnt/fast/dibs/passwogram/passwogram-bot/src/main/resourcespasswogram-bot.yml
+
+build/
+/out/

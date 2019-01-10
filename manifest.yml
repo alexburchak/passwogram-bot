@@ -1,0 +1,7 @@
+---
+applications:
+- name: passwogram-bot
+  path: passwogram-bot/build/libs/passwogram-bot.jar
+  buildpack: java_buildpack
+  memory: 768M
+  instances: 1

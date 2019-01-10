@@ -1,0 +1,11 @@
+server:
+  port: 8999
+  servlet:
+    context-path: /passwogram
+
+spring:
+  application:
+    name: passwogram
+
+passwogram-bot:
+  api-key: "755697688:AAFhN1_3mh5oPK3hhB9TuIi9Shm9MOKhpSw"
