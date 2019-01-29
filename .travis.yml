@@ -2,3 +2,12 @@ language: java
 
 jdk:
   - openjdk11
+
+script:
+  - ./gradlew build -DskipITs=true
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: I9KvZJe7VdO1apWV5Iqleb6qFcv/NwPuSWjXrcvCkfWyfZftkIBFxXb/gymDt9XqiYgYnW1Z7CfXOw+iva/42UIUqOCA0R5lyrtvVyhqDDrva/EwX15lcptaeVLdEVbCAr0FooL2W2t31S5B3Ax5WDnfLJSloW1E76/cFJfD7ry0q3bvyya7OHoVat7RaiCXgIO1TeIiZFiiBTmymJMoz+/stMwpnOiFIXJdUxgy6MtUlDP/G/uMZm2JF/C/QYqkvu2QUuVNTrMsFXFMMwsRl03y53tt+hWZ0IZrALCTbh+45EtFILOYovVv/O9e6Kcvoni3m9/VpahLH2UILQB36jkcb4OHH3Q4MAfo+wSuJhHzCK9olDi4N+nW5qIvNaxU8ZMyaj8UE1msg1fHaC79K5vNAapbs2m5hFJfAI/pO8fZy3hB+zW2LSrfzZPUCMYMjED6EqbrSMM57qEOoF6A8E+YEWkTtr32k+wYCvMKi4xDb4oUsxPeWZ47uvRCwQH7RytkUEaaFvY0mhIuON7Zau+fYHVCkY6nUKWSlwXa5OrlFujek0PIyhjHTRPTI0f9vMDmLwTfcDaJGploR0aXxNsyV1fcuJmKhwmsZB+Y05MmIKCvQuA3NcSph/qX6u8cmRmDUALr9vYW2iODQ+Sm2eB1FD0o2tWAS3UCYOsJonE=
+  app: passwogram-bot
