@@ -33,7 +33,7 @@ dependencies {
 }
 
 processResources {
-    filesMatching("**/*") {
+    filesMatching(["**/*.properties", "**/*.txt"]) {
         expand project.properties
     }
 }

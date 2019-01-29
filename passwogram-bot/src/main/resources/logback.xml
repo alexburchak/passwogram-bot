@@ -8,10 +8,10 @@
     </appender>
 
     <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${PASSWOGRAM_BOT_HOME}/lib/passwogram-bot.log</file>
+        <file>passwogram-bot.log</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${PASSWOGRAM_BOT_HOME}/lib/passwogram-bot.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>passwogram-bot.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
 

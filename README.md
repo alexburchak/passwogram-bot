@@ -26,7 +26,7 @@ To build the project run
 $ gradle clean build
 ```
 
-Gradle will generate and compile sources, process resources, create JAR and ZIP artifacts, run unit tests.
+Gradle will generate and compile sources, process resources, create JAR artifacts, run unit tests.
 
 Generated *JAR* artifacts have manifest entries like these:
 
@@ -65,58 +65,18 @@ The bot application can be deployed as Spring Boot application runnable with *ja
 
 ### Bot configuration
 
-Main application configuration file called *passwogram-bot.yml*. It defines following important sections:
+Main application configuration file called *application.yml*. It defines following important sections:
 
 * *spring* - standard Spring configuration properties (more details [here](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)).
 * *passwogram-bot* - application own properties, i.e. integrations configuration etc.
 
 ```yaml
 passwogram-bot:
-  api-key: "123456789:AAbbCCddEEffGGhhIIjjKKllMMnnOOppQQ="
+  api-key: ${TELEGRAM_API_KEY}
 ```
 
 Here, we have following properties:
 * *api-key* - API key given to you by [BotFather](https://telegram.me/BotFather). See [Creating new bot](https://core.telegram.org/bots#creating-a-new-bot) for more details 
-
-### Deploying with embedded Web server
-
-This approach assumes there is pre-defined folder structure (location of files from the distribution, not shown here, is configured through configuration file *passwogram-bot.yml*):
-
-Main configuration and logger configuration files are automatically found by the application.
-
-```sh
-$ unzip -q passwogram-bot/build/distributions/passwogram-bot.zip -d /tmp/passwogram-bot
-
-$ tree /tmp/passwogram-bot
-/tmp/passwogram-bot
-├── bin
-│   └── passwogram-bot.sh
-├── conf
-│   ├── logback.xml
-│   └── passwogram-bot.yml
-└── lib
-    └── passwogram-bot.jar
-
-3 directories, 4 files
-```
-
-Here is an example configuration file:
-
-```yaml
-spring:
-  application:
-    name: passwogram-bot
-
-server:
-  port: 8888
-  servlet:
-    context-path: /passwogram
-
-passwogram-bot:
-  api-key: "123456789:AAbbCCddEEffGGhhIIjjKKllMMnnOOppQQ="
-```
-
-Now, you can run the server with *passwogram-bot.sh*.
 
 ### Deploying to Pivotal Cloud Foundry
 
@@ -134,40 +94,12 @@ OK
 ...
 ```
 
-Now, you need to create configuration files in *passwogram-bot/src/main/resources/*. To do this, you may just copy them from *passwogram-bot/src/main/conf* 
+Before deployment, you need to set you own Telegram API key:
 
 ```sh
-$ cp passwogram-bot/src/main/resources/passwogram-bot.yml passwogram-bot/src/main/resources/application.yml
-$ cp passwogram-bot/src/main/resources/logback.xml passwogram-bot/src/main/resources/logback.xml
-```
-
-or create files as stated below.
- 
-Application configuration file *passwogram-bot/src/main/resources/application.yml* may have following content:
-
-```yaml
-passwogram-bot:
-  api-key: "123456789:AAbbCCddEEffGGhhIIjjKKllMMnnOOppQQ="
-```
-
-Logback configuration file *passwogram-bot/src/main/resources/logback.xml* may have following content:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-
-<configuration>
-    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%X{ctx}] [%t] %-5p [%c{1}] %m%n</pattern>
-        </encoder>
-    </appender>
-
-    <logger name="org.alexburchak.passwogram" level="DEBUG"/>
-
-    <root level="INFO">
-        <appender-ref ref="consoleAppender"/>
-    </root>
-</configuration>
+$ cf set-env passwogram-bot TELEGRAM_API_KEY "123456789:AAbbCCddEEffGGhhIIjjKKllMMnnOOppQQ="
+Setting env variable 'TELEGRAM_API_KEY' to '123456789:AAbbCCddEEffGGhhIIjjKKllMMnnOOppQQ=' for app passwogram-bot in org alexburchak.org / space development as alexburchak@gmail.com...
+OK
 ```
 
 Next, push changes to Cloud Foundry:
@@ -228,16 +160,79 @@ start command:   JAVA_OPTS="-agentpath:$PWD/.java-buildpack/open_jdk_jre/bin/jvm
 Check if service is available:
 
 ```sh
-curl http://passwogram-bot.cfapps.io/actuator/info
+$ curl http://passwogram-bot.cfapps.io/actuator/info
 {"version":"1.0.0-SNAPSHOT","builtJDK":"11.0.1","builtBy":"al","builtDate":"2019-01-10T12:30:41+0200","builtHost":"pepper"}
 ```
 
 Ask for new password in Telegram application:
 
 ```
-> Alexander
+> Me
 1
 
 > PasswoGram
 QeiZA8#28ch
 ```
+
+### Deploying to Heroku
+
+After project checkout, run
+
+```sh
+$ heroku create
+Creating app... done, ⬢ mighty-beach-59468
+https://mighty-beach-59468.herokuapp.com/ | https://git.heroku.com/mighty-beach-59468.git
+```
+
+and rename the application repository:
+
+```sh
+$ heroku apps:rename passwogram-bot
+Renaming mighty-beach-59468 to passwogram-bot... done
+https://passwogram-bot.herokuapp.com/ | https://git.heroku.com/passwogram-bot.git
+Git remote heroku updated
+```
+
+Before deployment, you need to set you own Telegram API key:
+
+```sh
+$ heroku config:set --app passwogram-bot "TELEGRAM_API_KEY=123456789:AAbbCCddEEffGGhhIIjjKKllMMnnOOppQQ="
+Setting TELEGRAM_API_KEY and restarting ⬢ passwogram-bot... done, v4
+TELEGRAM_API_KEY: 123456789:AAbbCCddEEffGGhhIIjjKKllMMnnOOppQQ=
+```
+
+Next, to deploy application, use command
+
+```sh
+$ git push heroku master
+Counting objects: 86, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (53/53), done.
+Writing objects: 100% (86/86), 67.36 KiB | 0 bytes/s, done.
+Total 86 (delta 4), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote: 
+remote: -----> Gradle app detected
+remote: -----> Spring Boot detected
+remote: -----> Installing JDK 1.8... done
+remote: -----> Building Gradle app...
+remote: -----> executing ./gradlew build -x test
+...
+remote:        BUILD SUCCESSFUL in 42s
+remote:        8 actionable tasks: 8 executed
+remote: -----> Discovering process types
+remote:        Procfile declares types -> web
+remote: 
+remote: -----> Compressing...
+remote:        Done: 85.2M
+remote: -----> Launching...
+remote:        Released v3
+remote:        https://passwogram-bot.herokuapp.com/ deployed to Heroku
+remote: 
+remote: Verifying deploy... done.
+To https://git.heroku.com/passwogram-bot.git
+ * [new branch]      master -> master
+```
+
+This GitHub repository is configured to run builds on [Travis](https://travis-ci.com) and each successful build is automatically deployed to [Heroku](https://heroku.com).

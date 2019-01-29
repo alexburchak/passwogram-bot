@@ -1,4 +1,4 @@
-package org.alexburchak.passwogram.generator.passwordrandom;
+package org.alexburchak.passwogram.generator.sethcardoza;
 
 import lombok.extern.slf4j.Slf4j;
 import org.alexburchak.passwogram.generator.GeneratorNames;
@@ -18,15 +18,15 @@ import java.net.URI;
  */
 @Component
 @Slf4j
-public class PasswordRandomGenerator implements Generator {
+public class SethCardozaRandomPasswordGenerator implements Generator {
     @Override
     public String getName() {
-        return GeneratorNames.PASSWORD_RANDOM_GENERATOR;
+        return GeneratorNames.SETH_CARDOZA_RANDOM_PASSWORD;
     }
 
     @Override
     public String generate(@SuppressWarnings("unused") String sample) {
-        log.debug("Asked for new password from passwordrandom.com");
+        log.debug("Asked for new password from http://www.sethcardoza.com");
 
         SimpleClientHttpRequestFactory clientHttpRequestFactory = new SimpleClientHttpRequestFactory();
         clientHttpRequestFactory.setConnectTimeout(60000);
@@ -41,6 +41,6 @@ public class PasswordRandomGenerator implements Generator {
                 })
                 .build();
 
-        return restTemplate.getForObject("https://www.passwordrandom.com/query?command=password", String.class);
+        return restTemplate.getForObject("http://www.sethcardoza.com/api/rest/tools/random_password_generator/length:16/complexity:alphaNumSpecial", String.class);
     }
 }

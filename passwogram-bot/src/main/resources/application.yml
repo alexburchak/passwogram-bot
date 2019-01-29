@@ -8,4 +8,4 @@ spring:
     name: passwogram
 
 passwogram-bot:
-  api-key: "755697688:AAFhN1_3mh5oPK3hhB9TuIi9Shm9MOKhpSw"
+  api-key: ${TELEGRAM_API_KEY}

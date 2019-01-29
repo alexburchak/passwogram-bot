@@ -71,45 +71,6 @@ subprojects {
     }
 }
 
-def libraryProjects() {
-    subprojects.findAll { !new File(it.projectDir, 'src/main/bin').directory }
-}
-
-def bootJarProjects() {
-    subprojects.findAll { new File(it.projectDir, 'src/main/bin').directory }
-}
-
-def configureLibraryProject(p) {
-}
-
-def configureBootProject(p) {
-    p.task("zip", type: Zip) {
-        description = 'Create zip distribution'
-        group "Build"
-        archiveName = "${p.name}.zip"
-
-        from ("${p.projectDir}/src/main/") {
-            into '/'
-            include('bin/', 'conf/', 'examples/')
-        }
-        from ("${p.buildDir}/libs/${p.name}.jar") {
-            into('lib/')
-        }
-    }
-
-    p.apply plugin:'base'
-
-    p.build.finalizedBy("zip")
-}
-
-configure(libraryProjects()) {
-    configureLibraryProject(it)
-}
-
-configure(bootJarProjects()) {
-    configureBootProject(it)
-}
-
 apply plugin:'base'
 
 evaluationDependsOnChildren()
