@@ -20,7 +20,3 @@ dependencies {
 
     testCompile "org.testng:testng:${testngVersion}"
 }
-
-test {
-    useTestNG()
-}

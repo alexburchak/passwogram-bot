@@ -18,7 +18,7 @@ bootJar {
 }
 
 dependencies {
-    compile project(":generator-passwordrandom")
+    compile project(":generator-impl")
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
@@ -26,6 +26,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "com.github.pengrad:java-telegram-bot-api:${javaTelegramBotApiVersion}"
 
+    testCompile "org.mockito:mockito-core:${mockitoVersion}"
     testCompile "org.testng:testng:${testngVersion}"
     testCompile ("org.springframework.boot:spring-boot-starter-test") {
         exclude group: "junit", module: "junit"

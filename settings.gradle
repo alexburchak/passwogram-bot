@@ -1,5 +1,5 @@
 rootProject.name = 'PasswoGram'
 
 include 'generator-api'
-include 'generator-passwordrandom'
+include 'generator-impl'
 include 'passwogram-bot'

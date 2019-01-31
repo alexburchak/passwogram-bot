@@ -42,7 +42,7 @@ public class UpdateHandlerImpl implements UpdateHandler {
             for (Generator generator: generators) {
                 try {
                     password = generator.generate(sample);
-                    log.info("Generated password for chat {} with {}", chatId, generator.getName());
+                    log.info("Successfully generated password for chat {} with {}", chatId, generator.getName());
                 } catch (Throwable t) {
                     log.error("Failed to generate password for chat {} with {}", chatId, generator.getName(), t);
                 }
